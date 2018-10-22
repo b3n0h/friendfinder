@@ -1,7 +1,11 @@
 const express = require('express')
 const app = express()
-const path = require('path')
+const bodyparser = require('body-parser')
+
+app.use(bodyparser.urlencoded({extended: true}))
+app.use(bodyparser.json())
 
 require('./app/routing/htmlRoutes.js')(app)
+
 
 app.listen(3005, () => {console.log('http://localhost:3005')})
