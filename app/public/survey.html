@@ -139,17 +139,38 @@
 
     </form>
 
-    <div class="ui modal">
-      <i class="close icon"></i>
-      <div class="header">
-        Your Best Match is:
-      </div>
-      <div class="image content">
-        <div class="description">
-          <div id="matchName" class="ui header"></div>
-        </div>
-        <div class="ui medium image">
-          <img id="matchPhoto" src="" style="height:400px; width:400px;">
+    <hr>
+
+    <div>
+      <span>
+        <a href="https://github.com/b3n0h/friendfinder">Github Repo</a> |
+      </span>
+      <span>
+        <a href="/api/friendsa">API Friends List</a>
+      </span>
+    </div>
+
+    <div class="ui modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Congrats! Your best match is:</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+            <div class="image content">
+              <div class="description">
+                <div id="matchName" class="ui header"></div>
+              </div>
+              <div class="ui medium image">
+                <img id="matchPhoto" src="" style="height:300px; width:300px;">
+              </div>
+            </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
         </div>
       </div>
     </div>
