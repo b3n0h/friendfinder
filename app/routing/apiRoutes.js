@@ -3,35 +3,24 @@ var friends = require('../data/friends.js')
 module.exports = app => {
   app.get('/api/friends', (req, res) => {
     res.json(friends)
-    console.log('Number of possible friends: ', friends.length)
   })
 
   app.post('/api/friends', (req, res) => {
-
-    let soulMate = {
-      name: '',
-      photo: '',
-      scoreDiff: 1000
-    }
-
-    let userProfile = req.body
-    let userScore = userProfile.score
-    let totalDiff = 0
-
+    let initDiff = 50
+    let friendIndex
     for (let i = 0; i < friends.length; i++) {
       totalDiff = 0
 
-      for (let o = 0; 0 < friends[i].score.length; o++) {
-        totalDiff += Math.abs(parseInt(userScore[o]) - parseInt(friends[i].score[o]))
+      for (let o = 0; o < 10; o++) {
+        totalDiff += Math.abs(friends[i].score[o] - req.body.score[o])
 
-        if (totalDiff <= soulMate.scoreDiff) {
-          soulMate.name = friends[i].name
-          soulMate.photo = friends[i].photo
-          soulMate.scoreDiff = totalDiff
+        if (totalDiff <= initDiff) {
+          initDiff = totalDiff
+          friendIndex = i
         }
       }
     }
-    friends.push(userProfile)
-    res.json(soulMate)
+    friends.push(req.body)
+    res.json(friends[friendIndex])
   })
 }

@@ -9,9 +9,10 @@
   <title>Friend Finder Survey</title>
 </head>
 <body>
-  <div class="userInfo container p-5">
+  <div class="container p-5">
     <h2>About You</h2>
       <hr class='my-4'>
+
     <form>
       <div class="form-group">
         <label for="name">First and Last Name</label>
@@ -21,9 +22,7 @@
         <label for="image">Image</label>
         <input type="text" class="form-control" id="userPhoto" placeholder="Enter url to your image">
       </div>
-    </form>
-  </div>
-  <div class="survey container pl-5 pr-5">
+
     <h2>Survey</h2>
       <hr class='my-4'>
       <h3>Question 1</h3>
@@ -136,52 +135,69 @@
         <option value="5">5 (Strongly Agree)</option>
       </select>
 
-      <div class='pt-5 pb-5'><a href="#"><button type="button" class="btn btn-lg btn-primary" id="submit"><i class="fa fa-lg fa-paper-plane-o" aria-hidden="true"></i> Submit</button></a></div>
+      <div class="pt-5"><button type="button" class="btn btn-lg btn-primary" id="submit"><i class="fa fa-lg fa-paper-plane-o" aria-hidden="true"></i> Submit</button></div>
 
-  </div>
+    </form>
 
-  <div class="modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+    <div class="ui modal">
+      <i class="close icon"></i>
+      <div class="header">
+        Your Best Match is:
+      </div>
+      <div class="image content">
+        <div class="description">
+          <div id="matchName" class="ui header"></div>
         </div>
-        <div class="modal-body">
-          <p>Modal body text goes here.</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+        <div class="ui medium image">
+          <img id="matchPhoto" src="" style="height:400px; width:400px;">
         </div>
       </div>
     </div>
+ 
   </div>
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+  
+  <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
   crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
   crossorigin="anonymous"></script>
   <script>
-    document.querySelector('#submit').addEventListener('click', () => {
-      let userProfile = {
-        name: document.querySelector('#userName').value.trim(),
-        photo: document.querySelector('#userPhoto').value.trim(),
-        score: [
-          document.querySelector('#Q1').value,
-          document.querySelector('#Q2').value,
-          document.querySelector('#Q3').value,
-          document.querySelector('#Q4').value,
-          document.querySelector('#Q5').value,
-          document.querySelector('#Q6').value,
-          document.querySelector('#Q7').value,
-          document.querySelector('#Q8').value,
-          document.querySelector('#Q9').value,
-          document.querySelector('#Q10').value
-        ] 
+    $('#submit').on('click', function () {
+      event.preventDefault()
+      let name = $('#userName').val().trim()
+      let photo = $('#userPhoto').val().trim()
+      let score = [
+        $('#Q1').val(),
+        $('#Q2').val(),
+        $('#Q3').val(),
+        $('#Q4').val(),
+        $('#Q5').val(),
+        $('#Q6').val(),
+        $('#Q7').val(),
+        $('#Q8').val(),
+        $('#Q9').val(),
+        $('#Q10').val()
+      ]
+
+      let newFriend = {
+        name: name,
+        photo: photo,
+        score: score
       }
-      console.log(userProfile)
+      
+      fetch('/api/friends', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json; charset=utf-8' },
+        body: JSON.stringify(newFriend)
+      })
+        .then(r => {
+          return r.json()
+        })
+        .then(d => {
+          $('.ui.modal').modal('show')
+          $('#matchName').text(d.name)
+          $('#matchPhoto').attr('src', d.photo)
+        })
+        .catch(e => console.error(e))
     })
   </script>
 </body>
