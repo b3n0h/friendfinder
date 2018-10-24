@@ -146,27 +146,27 @@
         <a href="https://github.com/b3n0h/friendfinder">Github Repo</a> |
       </span>
       <span>
-        <a href="/api/friendsa">API Friends List</a>
+        <a href="/api/friends">API Friends List</a>
       </span>
     </div>
 
-    <div class="ui modal" tabindex="-1" role="dialog">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
+    <div class="ui modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content modal-body">
+          <div class="modal-header conatiner-fluid">
             <h5 class="modal-title">Congrats! Your best match is:</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-            <div class="image content">
-              <div class="description">
-                <div id="matchName" class="ui header"></div>
-              </div>
-              <div class="ui medium image">
-                <img id="matchPhoto" src="" style="height:300px; width:300px;">
-              </div>
+          <div class="image content col-md-auto">
+            <div class="description">
+              <h5 id="matchName" class="modal-title"></h5>
             </div>
+            <div class="ui medium image-fluid">
+              <img id="matchPhoto" src="" style="height:300px; width:300px;">
+            </div>
+          </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             <button type="button" class="btn btn-primary">Save changes</button>
@@ -174,7 +174,7 @@
         </div>
       </div>
     </div>
- 
+
   </div>
   
   <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
