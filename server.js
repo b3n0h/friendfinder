@@ -8,4 +8,4 @@ app.use(bodyparser.json())
 require('./app/routing/htmlRoutes.js')(app)
 require('./app/routing/apiRoutes.js')(app)
 
-app.listen(3005, () => {console.log('http://localhost:3005')})
+app.listen(process.env.PORT || 3005, () => {console.log('http://localhost:3005')})
